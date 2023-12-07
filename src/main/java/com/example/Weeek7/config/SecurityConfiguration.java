@@ -20,6 +20,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
@@ -43,22 +45,35 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000, http://localhost:5173", "http://localhost:8081", "http://localhost:8080"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "HEAD", "OPTIONS", "PUT", "PATCH", "DELETE"));
-        config.setMaxAge(3600L);
-        config.setAllowCredentials(true);
-        config.setAllowedHeaders(Arrays.asList("Accept", "Access-Control-Request-Method", "Access-Control-Allow-Origin", "Access-Control-Request-Headers",
-                "Accept-Language", "Authorization", "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
-                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        source.registerCorsConfiguration("/**", config);
-
-        return source;
+    public WebMvcConfigurer webMvcConfigurer() {
+        return new WebMvcConfigurer() {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**")
+                    .allowedMethods("HEAD", "POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH")
+                    .allowedOrigins("*")
+                    .allowedHeaders("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization")
+                    .maxAge(3600);
+            }
+        };
     }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(Arrays.asList("http://localhost:3000, http://localhost:5173", "http://localhost:8081", "http://localhost:8080"));
+//        config.setAllowedMethods(Arrays.asList("GET", "POST", "HEAD", "OPTIONS", "PUT", "PATCH", "DELETE"));
+//        config.setMaxAge(3600L);
+//        config.setAllowCredentials(true);
+//        config.setAllowedHeaders(Arrays.asList("Accept", "Access-Control-Request-Method", "Access-Control-Allow-Origin", "Access-Control-Request-Headers",
+//                "Accept-Language", "Authorization", "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
+//                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+//        source.registerCorsConfiguration("/**", config);
+//
+//        return source;
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
