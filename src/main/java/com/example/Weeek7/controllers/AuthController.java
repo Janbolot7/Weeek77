@@ -37,11 +37,11 @@ public class AuthController {
         return ResponseEntity.ok("Активация аккаунта прошла успешно!");
     }
 
-    @PostMapping("/resendMessage3")
-    public ResponseEntity<?> resendMail(@RequestParam String email, @RequestParam String token) {
-        authService.sendActivationEmail(email, token);
-        return ResponseEntity.ok("Email sent successfully");
-    }
+//    @PostMapping("/resendMessage3")
+//    public ResponseEntity<?> resendMail(@RequestParam String email, @RequestParam String token) {
+//        authService.sendActivationEmail(email, token);
+//        return ResponseEntity.ok("Email sent successfully");
+//    }
 //    @PostMapping("/resendMessage2")
 //    public ResponseEntity<Object> sendEmail(@RequestBody RegistrationUserDto registrationUserDto) {
 //        String email = registrationUserDto.getEmail();
