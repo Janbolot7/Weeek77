@@ -2,6 +2,8 @@ package com.example.Weeek7.controllers;
 
 import com.example.Weeek7.dto.JwtRequest;
 import com.example.Weeek7.dto.RegistrationUserDto;
+import com.example.Weeek7.entity.ActivationToken;
+import com.example.Weeek7.entity.User;
 import com.example.Weeek7.service.AuthService;
 import com.example.Weeek7.service.EmailService;
 import io.swagger.annotations.Api;
@@ -34,12 +36,17 @@ public class AuthController {
         authService.activateUserByToken(token);
         return ResponseEntity.ok("Активация аккаунта прошла успешно!");
     }
-    @PostMapping("/resendMessage2")
-    public ResponseEntity<Object> sendEmail(@RequestBody RegistrationUserDto registrationUserDto) {
-        String email = registrationUserDto.getEmail();
-        String token = "Enter your token";
-        authService.sendActivationEmail(email, token);
-        return ResponseEntity.ok().build();
-    }
 
+    @PostMapping("/resendMessage3")
+    public ResponseEntity<?> resendMail(@RequestParam String email, @RequestParam String token) {
+        authService.sendActivationEmail(email, token);
+        return ResponseEntity.ok("Email sent successfully");
+    }
+//    @PostMapping("/resendMessage2")
+//    public ResponseEntity<Object> sendEmail(@RequestBody RegistrationUserDto registrationUserDto) {
+//        String email = registrationUserDto.getEmail();
+//        String token = "Enter your token";
+//        authService.sendActivationEmail(email, token);
+//        return ResponseEntity.ok().build();
+//    }
 }
