@@ -72,9 +72,10 @@ public class AuthService {
         }else throw new IllegalArgumentException("Activation token not found");
     }
 
-    private void sendActivationEmail(String email, String token) {
+    public void sendActivationEmail(String email, String token) {
         String activationLink = "http://68.183.64.48:8081/auth/activate?token=" + token;
         emailService.sendEmail(email, activationLink);
     }
+
 
 }

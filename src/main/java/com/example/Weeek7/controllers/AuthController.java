@@ -3,6 +3,7 @@ package com.example.Weeek7.controllers;
 import com.example.Weeek7.dto.JwtRequest;
 import com.example.Weeek7.dto.RegistrationUserDto;
 import com.example.Weeek7.service.AuthService;
+import com.example.Weeek7.service.EmailService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,11 @@ public class AuthController {
     public ResponseEntity<String> activateUserAccount(@RequestParam("token") String token) {
         authService.activateUserByToken(token);
         return ResponseEntity.ok("Активация аккаунта прошла успешно!");
+    }
+    @PostMapping("/resendMessage")
+    public ResponseEntity<Object> sendEmail(@RequestBody RegistrationUserDto registrationUserDto, @RequestParam String link){
+        String email = registrationUserDto.getEmail();
+        authService.sendActivationEmail(email, link);
+        return ResponseEntity.ok("Activation email sent successfully");
     }
 }
