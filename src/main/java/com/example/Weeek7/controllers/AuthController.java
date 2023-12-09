@@ -34,7 +34,7 @@ public class AuthController {
         authService.activateUserByToken(token);
         return ResponseEntity.ok("Активация аккаунта прошла успешно!");
     }
-    @PostMapping("/resendMessage")
+    @PostMapping("/resendMessage2")
     public ResponseEntity<Object> sendEmail(@RequestBody RegistrationUserDto registrationUserDto) {
         String email = registrationUserDto.getEmail();
         String token = "Enter your token";
