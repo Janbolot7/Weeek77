@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Stop the running process
