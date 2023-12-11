@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @Slf4j
-@EntityScan(basePackages = "com.example.Weeek7")
 @OpenAPIDefinition(servers = {
 		@Server(url = "/", description = "Default Server URL")})
 public class NeobisAuthProjectApplication {
