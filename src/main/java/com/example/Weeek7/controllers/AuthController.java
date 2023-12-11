@@ -17,7 +17,7 @@ import static com.example.Weeek7.config.SwaggerConfig.AUTH;
 @Api(tags = AUTH)
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api")
 public class AuthController {
     private final AuthService authService;
 
@@ -37,16 +37,4 @@ public class AuthController {
         return ResponseEntity.ok("Активация аккаунта прошла успешно!");
     }
 
-//    @PostMapping("/resendMessage3")
-//    public ResponseEntity<?> resendMail(@RequestParam String email, @RequestParam String token) {
-//        authService.sendActivationEmail(email, token);
-//        return ResponseEntity.ok("Email sent successfully");
-//    }
-//    @PostMapping("/resendMessage2")
-//    public ResponseEntity<Object> sendEmail(@RequestBody RegistrationUserDto registrationUserDto) {
-//        String email = registrationUserDto.getEmail();
-//        String token = "Enter your token";
-//        authService.sendActivationEmail(email, token);
-//        return ResponseEntity.ok().build();
-//    }
 }
