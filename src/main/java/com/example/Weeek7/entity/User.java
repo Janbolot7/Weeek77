@@ -13,11 +13,11 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
-//@Table(name = "users")
+@Builder
+@Table(name = "users")
 public class User {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String username;
@@ -26,11 +26,11 @@ public class User {
     private Boolean accountNonExpired = true;
     private Boolean credentialsNonExpired = true;
     private Boolean accountNonLocked = true;
-//    @ManyToMany
-//    @JoinTable(
-//            name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-//    )
-//    private Collection <Role> roles;
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection <Role> roles;
 }
